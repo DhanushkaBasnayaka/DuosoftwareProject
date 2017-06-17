@@ -8,7 +8,7 @@
     <net.bohush.geometricprogressview.GeometricProgressView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:gp_color="@color/colorDarkGray"
+        app:gp_color="@color/colorDarkBlue"
         app:gp_figure_padding="2dp"
         app:gp_number_of_angles="10"
         app:gp_type="kite" />

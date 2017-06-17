@@ -24,7 +24,7 @@ import javax.inject.Inject;
 import butterknife.ButterKnife;
 
 /**
- * Created by Dhanushka on 22/05/2017.
+ * Created by DhanushkaK on 22/05/2017.
  */
 
 public class BaseActivity extends AppCompatActivity {
