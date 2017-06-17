@@ -1,7 +1,9 @@
 package com.soluvition.dw.duosoftwareproject;
 
+import com.soluvition.dw.duosoftwareproject.activityview.HomeActivity;
+import com.soluvition.dw.duosoftwareproject.activityview.SplashActivity;
 import com.soluvition.dw.duosoftwareproject.service.DuosoftServiceManager;
-import com.soluvition.dw.duosoftwareproject.activityview.MainActivity;
+import com.soluvition.dw.duosoftwareproject.activityview.LogingActivity;
 
 import dagger.Module;
 import dagger.Provides;
@@ -13,11 +15,13 @@ import dagger.Provides;
 
 @Module(injects = {
 
-        MainActivity.class,
-
+        LogingActivity.class,
+        SplashActivity.class,
+        HomeActivity.class
 
 }, complete = true)
 public class DuosoModule {
+
     private DuosoApplication mduosoAppApplication;
 
     public DuosoModule(DuosoApplication duosoAppApplication) {

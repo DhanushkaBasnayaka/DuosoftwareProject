@@ -2,6 +2,7 @@ package com.soluvition.dw.duosoftwareproject.service.events;
 
 
 import com.soluvition.dw.duosoftwareproject.model.User;
+import com.soluvition.dw.duosoftwareproject.service.responses.LoginResponse;
 
 /**
  * Created by Dhanushka on 17/06/2017.
@@ -9,9 +10,9 @@ import com.soluvition.dw.duosoftwareproject.model.User;
 
 public class LoginEvent {
 
-    public User result;
+    public  LoginResponse result;
 
-    public LoginEvent(User result) {
-        this.result = result;
+    public LoginEvent(LoginResponse body) {
+        this.result = body;
     }
 }

@@ -15,6 +15,7 @@ import com.google.gson.Gson;
 import com.soluvition.dw.duosoftwareproject.DuosoConstant;
 import com.soluvition.dw.duosoftwareproject.R;
 import com.soluvition.dw.duosoftwareproject.model.User;
+import com.soluvition.dw.duosoftwareproject.service.responses.LoginResponse;
 
 
 /**
@@ -23,6 +24,56 @@ import com.soluvition.dw.duosoftwareproject.model.User;
 
 public class DuosoftHelper {
 
+
+    public static SharedPreferences getPreferences(Context context) {
+        return context.getSharedPreferences(DuosoConstant.PREFERENCES, Context.MODE_PRIVATE);
+    }
+
+    public static boolean getUserLoggedInState(Context context) {
+        final SharedPreferences prefs = getPreferences(context);
+
+        return prefs.getBoolean(DuosoConstant.PREF_KEY_USER_LOGGED_IN_STATE, false);
+    }
+
+    public static String getAccessToken(Context context) {
+        final SharedPreferences prefs = getPreferences(context);
+
+        return prefs.getString(DuosoConstant.PREF_KEY_ACCESS_TOKEN, "");
+    }
+
+    public static void saveToPreferences(Context context, String token, boolean userLoggedInState) {
+        final SharedPreferences preferences = context.getSharedPreferences(
+                DuosoConstant.PREFERENCES, Context.MODE_PRIVATE);
+        final SharedPreferences.Editor editor = preferences.edit();
+
+        try {
+            editor.putString(
+                    DuosoConstant.PREF_KEY_ACCESS_TOKEN, token
+            );
+
+
+            editor.putBoolean(
+                    DuosoConstant.PREF_KEY_USER_LOGGED_IN_STATE, userLoggedInState
+            );
+
+            editor.apply();
+        } catch (final Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public static void removePreferences(Context context) {
+        SharedPreferences preferences = context.getSharedPreferences(DuosoConstant.PREFERENCES, Context.MODE_PRIVATE);
+
+        preferences.edit().remove(DuosoConstant.PREF_KEY_ACCESS_TOKEN).commit();
+
+
+        preferences.edit().putBoolean(
+                DuosoConstant.PREF_KEY_USER_LOGGED_IN_STATE, false
+        ).commit();
+
+    }
 
     public static boolean isNetworkAvailable(final Context context) {
         final ConnectivityManager connectivityManager = ((ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE));

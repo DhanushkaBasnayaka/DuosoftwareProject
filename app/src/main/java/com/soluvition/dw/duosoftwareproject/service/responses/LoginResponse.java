@@ -8,7 +8,9 @@ import com.soluvition.dw.duosoftwareproject.model.User;
  */
 
 public class LoginResponse {
-    public String status;
-    public User result;
-    public String error;
+    public String state;
+    public String token;
+    public String message;
+
+
 }

@@ -1,9 +1,8 @@
 package com.soluvition.dw.duosoftwareproject.service.requestes;
 
 /**
- * Created by Dhanushka on 17/06/2017.
+ * Created by Macbook on 6/17/17.
  */
 
-public class LogoutRequest {
-
+public class ListRequest {
 }

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="layout_padding">16dp</dimen>
+    <dimen name="layout_max_padding">32dp</dimen>
+    <dimen name="layout_small_padding">8dp</dimen>
+    <dimen name="layoutview_padding">20dp</dimen>
+    <dimen name="layoutview_top_padding">40dp</dimen>
+    <dimen name="layoutview_top_margin">60dp</dimen>
+    <dimen name="card_margin">5dp</dimen>
+    <dimen name="card_album_radius">0dp</dimen>
+</resources>

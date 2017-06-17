@@ -7,7 +7,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
 
+import org.greenrobot.eventbus.Subscribe;
+
 import com.soluvition.dw.duosoftwareproject.DuosoApplication;
+import com.soluvition.dw.duosoftwareproject.DuosoConstant;
 import com.soluvition.dw.duosoftwareproject.R;
 import com.soluvition.dw.duosoftwareproject.helper.DuosoftHelper;
 import com.soluvition.dw.duosoftwareproject.service.DuosoftServiceManager;
@@ -15,9 +18,10 @@ import com.soluvition.dw.duosoftwareproject.service.events.DismissWaitingEvent;
 import com.soluvition.dw.duosoftwareproject.service.events.ShowWaitingEvent;
 
 import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
 
 import javax.inject.Inject;
+
+import butterknife.ButterKnife;
 
 /**
  * Created by Nisala on 22/05/2017.
@@ -28,17 +32,13 @@ public class BaseActivity extends AppCompatActivity {
     public Dialog mProgress;
     protected String accessToken;
 
-    @Inject
-    public DuosoftServiceManager mDuosoftServiceManager;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         DuosoApplication.get(this).inject(this);
         EventBus.getDefault().register(this);
+        accessToken = DuosoftHelper.getAccessToken(this);
 
-//        accessToken = DuosoftHelper.getAccessToken(this);
-//        stringUser = PhoneMedHelper.getUser(this);
     }
 
     public void showWaiting(Context context) {
@@ -50,7 +50,7 @@ public class BaseActivity extends AppCompatActivity {
             mProgress.setCancelable(false);
         }
 
-        if (mProgress.isShowing() == false) {
+        if (!mProgress.isShowing()) {
             mProgress.show();
         }
     }
@@ -77,41 +77,29 @@ public class BaseActivity extends AppCompatActivity {
         dismissWaiting();
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
-
 
     @Override
-    protected void onPause() {
-        super.onPause();
-        EventBus.getDefault().unregister(this);
-
-    }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        EventBus.getDefault().register(this);
-    }
-
-    @Override
-    protected void onDestroy() {
+    public void onDestroy() {
         super.onDestroy();
     }
 
     @Override
-    protected void onStart() {
+    public void onStart() {
         super.onStart();
-
     }
 
     @Override
-    protected void onStop() {
+    protected void onResume() {
+        super.onResume();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Override
+    public void onStop() {
         super.onStop();
         EventBus.getDefault().unregister(this);
     }
+
 
     public void onBackPressed() {
         super.onBackPressed();

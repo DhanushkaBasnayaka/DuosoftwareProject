@@ -5,12 +5,12 @@ package com.soluvition.dw.duosoftwareproject.service.events;
  */
 
 public class FailedEvent {
-    public int mErrorCode;
+    public String message;
 
     public FailedEvent() {
     }
 
-    public FailedEvent(int errorCode) {
-        mErrorCode = errorCode;
+    public FailedEvent(String errorCode) {
+        message = errorCode;
     }
 }

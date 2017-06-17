@@ -5,7 +5,11 @@ package com.soluvition.dw.duosoftwareproject.service.requestes;
  */
 
 public class LoginRequest{
-    public String email;
+
+    public String userName;
     public String password;
-    public String user_type;
+    public String clientID;
+    public String scope[];
+    public String console;
+
 }

@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">Duosoftware Project</string>
+    <string name="hint_email">Emaile</string>
+    <string name="hint_password">Password</string>
+    <string name="btn_sign_up">Sign Up</string>
+    <string name="err_msg_email">Enter valid email address</string>
+    <string name="err_msg_password">Enter the password</string>
+    <string name="type">Type</string>
+    <string name="subject">Subject</string>
+    <string name="name">Name</string>
+    <string name="status">Status</string>
+    <string name="priority">Priority</string>
+    <string name="list_data">List Data</string>
 </resources>

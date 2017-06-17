@@ -1,12 +1,16 @@
 package com.soluvition.dw.duosoftwareproject.service;
 
 import com.soluvition.dw.duosoftwareproject.DuosoConstant;
+import com.soluvition.dw.duosoftwareproject.service.requestes.DetailsRequest;
 import com.soluvition.dw.duosoftwareproject.service.requestes.LoginRequest;
+import com.soluvition.dw.duosoftwareproject.service.requestes.MyTicketsListRequest;
 import com.soluvition.dw.duosoftwareproject.service.responses.LoginResponse;
+import com.soluvition.dw.duosoftwareproject.service.responses.MyTicketsListResponses;
 
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
+import okhttp3.ResponseBody;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Retrofit;
@@ -27,15 +31,23 @@ public class DuosoftService {
      */
     public static DuosoftService getInstance() {
         if (mPhoneMedService == null) {
-            mPhoneMedService = new DuosoftService();
+            mPhoneMedService = new DuosoftService(DuosoConstant.API_URL);
         }
         return mPhoneMedService;
     }
+
+    public static DuosoftService getLiteticket() {
+        if (mPhoneMedService == null) {
+            mPhoneMedService = new DuosoftService(DuosoConstant.API_URL_LIST);
+        }
+        return mPhoneMedService;
+    }
+
     /**
      * Private singleton constructor.
      */
 
-    private DuosoftService() {
+    private DuosoftService(String url) {
 
         // Add the interceptor to OkHttpClient
         HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor();
@@ -49,7 +61,7 @@ public class DuosoftService {
 
         OkHttpClient client = builder.build();
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(DuosoConstant.API_URL)
+                .baseUrl(url)
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build();
@@ -57,8 +69,17 @@ public class DuosoftService {
         this.mPhoneMedApi = retrofit.create(DuosoftApi.class);
     }
 
+
     public Call<LoginResponse> login(LoginRequest loginRequest) {
         return this.mPhoneMedApi.login(loginRequest);
+    }
+
+    public Call<MyTicketsListResponses> getMyTicketsList(MyTicketsListRequest mMyTicketsListRequest) {
+        return this.mPhoneMedApi.getMyTicketsList(mMyTicketsListRequest.Authorization, mMyTicketsListRequest.limit, mMyTicketsListRequest.pageNumber);
+    }
+
+    public Call<MyTicketsListResponses> getDetails(DetailsRequest mDetailsRequest) {
+        return this.mPhoneMedApi.getDetails(mDetailsRequest.Authorization, mDetailsRequest._id);
     }
 
 
